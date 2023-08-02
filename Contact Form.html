@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial,Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type='email'],
+        input[type="tel"],
+        select,
+        textarea{
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        textarea{
+            resize:veritcal;
+        }
+        input[type="submit"]{
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer; 
+        }
+        input[type="submit"]:hoover{
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+    
+        <form id="contactForm" method="post" action="">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+    
+            <label for="messageType">Message Type:</label>
+            <select id="messageType" name="messageType" required>
+                <option value="General">General Inquiry</option>
+                <option value="Support">Support Request</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Other</option>
+            </select>
+    
+            <label for="message">Drop your message here:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+    
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+          const contactForm = document.getElemetnById('contactForm');
+          const emailInput = document.getElementById('email');
+          
+          contactForm.addEventListener('submit', function(event){
+            if (!validateEmail(emailInput.value)) {
+                event.preventDefault();
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    });
+          
+    </script>
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $POST["email"];
+    $phone = $_POST["phone"];
+    $messageType = $_POST["messageType"];
+    $message = $_POST["message"];
+
+   
+
+   echo "<h2>Thank you for your submission!</h2>";
+    echo "<p>Name: $name</p>";
+    echo "<p>Email: $email</p>";
+    echo "<p>Phone Number: $phone</p>";
+    echo "<p>Message Type: $messageType</p>";
+    echo "<p>Message:</p><p>$message</p>";
+}
+    ?>
+
+
+
+
+</body>
+</html>
